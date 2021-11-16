@@ -12,7 +12,8 @@ matrix<double> matrix_p3h(int nholes, int nparticles,
     vector<int> bra, ket_delta_up, ket_delta_dn, ket_g, ket_pb, ket_pb_conj;
     
     num_sp = nholes+nparticles;
-    basis = gen_basis(nholes, nparticles);
+    //basis = gen_basis(nholes, nparticles);
+    basis = readBasisFromFile("sd.basis");
     num_states = basis.size1();
     H = matrix<double>(num_states,num_states);
     for (int i = 0; i < num_states; i++)
@@ -83,7 +84,11 @@ int main() {
     g = 0.5;
     pb = 0.1;
 
+    //matrix<int> basis = readBasisFromFile("sd.basis");
+    matrix<int> basis = gen_basis(nholes, nparticles);
+    std::cout << basis << std::endl;
 
+    //std::cout << basis << std::endl;
     H = matrix_p3h(nholes,nparticles, 0.0, d, g, pb);
 
     const int dim = 36;
